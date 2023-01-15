@@ -3,6 +3,8 @@ import { useAppDispatch, useAppSelector } from './store/hook';
 import { updateBoard } from './store';
 import { createBoard } from './utils/createBoard';
 import Board from './components/Board';
+import { formulaForColumnOfFour } from './utils/formulas';
+import { isColumOfFour } from './utils/moveCheckedLogic';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -14,6 +16,15 @@ function App() {
   useEffect(() => {
     dispatch(updateBoard(createBoard(boardSize)));
   }, [dispatch, boardSize]);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      const newBoard = [...board];
+      isColumOfFour(newBoard, boardSize, formulaForColumnOfFour(boardSize));
+      dispatch(updateBoard(newBoard));
+    }, 150);
+    return () => clearInterval(timeout);
+  }, [board, boardSize, dispatch]);
 
   return (
     <div className="flex items-center justify-center h-screen">

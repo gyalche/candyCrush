@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-image: url('./assets/background.png');
+  background-size: cover;
+  font-size: 60px;
+}
+.blabla {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 700px;
+  margin: auto;
+}
